@@ -1,7 +1,7 @@
 In this project, you will develop an Oozie workflow to process and analyze a large volume of flight
 data.
 
-• Instructions:
+â€¢ Instructions:
 
 1. Download the Airline On-time Performance data set (flight data set) from the period of
 October 1987 to April 2008 on the Statistical Computing website: 
@@ -15,7 +15,7 @@ out), respectively; and
 c. the most common reason for flight cancellations.
 
 
-• Requirements:
+â€¢ Requirements:
 1. Your workflow must contain at least three MapReduce jobs that run in fully distributed
 mode.
 2. Run your workflow to analyze the entire data set (total 22 years from 1987 to 2008) at one
@@ -23,11 +23,11 @@ time on two VMs first and then gradually increase the system scale to the maximu
 number of VMs for at least 5 increment steps, and measure each corresponding workflow
 execution time.
 3. Run your workflow to analyze the data in a progressive manner with an increment of 1 year,
-i.e. the first year (1987), the first 2 years (1987-1988), the first 3 years (1987-1989), …, and
+i.e. the first year (1987), the first 2 years (1987-1988), the first 3 years (1987-1989), â€¦, and
 the total 22 years (1987-2008), on the maximum allowed number of VMs, and measure each
 corresponding workflow execution time.
 
-• Submission:
+â€¢ Submission:
 
 1. A commands.txt text file that lists all the commands you used to run your code and produce
 the required results in fully distributed mode
