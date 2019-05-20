@@ -1,0 +1,63 @@
+/* The various steps taken to execte the program in the fully-distributed and pseudo-distributed modes
+
+Done By Shawn D'Souza - srd59
+
+*/
+
+
+*For fully-distributed Mode:
+
+
+1. In $HADOOP_HOME, Format the filesystem, start NameNode daemon and DataNode daemon:
+$ hdfs namenode -format
+$ sbin/start-dfs.sh
+
+2. Make the HDFS directories required to execute MapReduce jobs (in /home/ubuntu/hadoop):
+$ hdfs dfs -mkdir -p input
+$ hdfs dfs -put 100KWikiText.txt input
+
+3. Start Yarn
+$ sbin/start-yarn.sh
+
+4. Compile the relativefreq.java file:
+$ hadoop com.sun.tools.javac.Main relativefreq.java
+
+5. Make a jar file:
+$ jar cf relativefreq.jar relativefreq*.class
+
+6. Run the relativefreq.jar file 
+$ hadoop jar relativefreq.jar relativefreq input output
+
+7. Get the final result file from HDFS:
+$ hdfs dfs -get output output
+
+8. View the result:
+$ cd output
+$ pico part-r-00000
+
+
+*For pseudo-distributed Mode:
+
+1. In $HADOOP_HOME, Format the filesystem, start NameNode daemon and DataNode daemon:
+$ bin/hdfs namenode -format
+$ sbin/start-dfs.sh
+
+2. Copy the input files into the distributed filesystem:
+$ bin/hdfs dfs -put input/100KWikiText.txt input
+
+3. Compile the relativefreq.java file:
+$ bin/hadoop com.sun.tools.javac.Main relativefreq.java
+
+4. Make a jar file:
+$ jar cf relativefreq.jar relativefreq*.class
+
+5. Run the relativefreq.jar file 
+$ bin/hadoop jar relativefreq.jar relativefreq input output
+
+6. Get the final result file from HDFS:
+$ bin/hdfs dfs -get output output
+
+7. See the result:
+$ cd output
+$ pico part-r-00000
+

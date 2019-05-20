@@ -1,0 +1,102 @@
+i) The I/O format in each Hadoop task, i.e., the keys for the mappers and reducers:
+
+* 1st map-reduce (word_freq):
+
+
+Mapper:
+
+Input: Line
+Key: LongWritable
+Value: Text
+Output:
+Key: Text (A+" "+B or "!"+" "+A)
+Value: LongWritable (1)
+
+Reducer:
+
+Input:
+Key: Text (A+" "+B or "!"+" "+A)
+Value: LongWritable (1)
+Output:
+Key: Text (A+" "+B or "!"+" "+A)
+Value: LongWritable (count of the key)
+
+* 2nd map-reduce (pair_freq):
+
+Mapper:
+
+
+Input: Line
+Key: LongWritable
+Value: Text
+
+Output: 
+Key: Text (A+" "+B or "!"+" "+A)
+Value: LongWritable (count of the key)
+
+Reducer:
+
+
+Input:
+Key: Text (A+" "+B or "!"+" "+A)
+Value: LongWritable (count of the key)
+Output:
+Key: Text (A+" "+B)
+Value: Text (count of A+" "+B+" "+the count of A)
+
+* 3rd map-reduce (top_pair):
+
+Mapper:
+
+
+Input: Line
+Key: LongWritable
+Value: Text
+Output: 
+Key: LongWritable (count of A+" "+B)
+Value: Text (A+" "+B+" "+the count of A)
+
+
+Reducer:
+
+
+Input:
+Key: LongWritable (count of A+" "+B)
+Value: Text (A+" "+B+" "+the count of A)
+Output: 
+Key: LongWritable (count of A+" "+B)
+Value: Text (A+" "+B+" "+the count of A)
+
+
+* 4th map-reduce (rel_freq):
+
+Mapper:
+
+
+Input: Line
+Key: LongWritable
+Value: Text
+Output:
+Key: FloatWritable (value of f(B|A))
+Value: Text (A+" "+B)
+
+Reducer:
+
+
+Input:
+Key: FloatWritable (value of f(B|A))
+Value: Text (A+" "+B)
+Output:
+Key: FloatWritable (value of f(B|A))
+Value: Text (A+" "+B)
+
+
+
+
+ii) The Hadoop cluster settings used, i.e., number of VM instances, number of mappers and reducers, etc.
+Ans: 4 VM instances were used. They are all the Ubuntu Server 18.04 LTS (HVM), SSD Volume Type of amazon aws EC2: t2.small.
+4 mappers and 4 reducers were used in the Hadoop cluster.
+
+iii) The running time for your MapReduce approach in both pseudo and fully distributed modes:
+Ans: * Pseudo distributed mode: Approximately 2 minutes 30 seconds.
+* Fully distributed mode: Approximately 4 minutes.
