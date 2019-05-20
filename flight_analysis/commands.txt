@@ -1,0 +1,60 @@
+A) Passphrase-less SSH
+
+B) Hadoop Configurations common on all nodes
+
+C) NameNode Specific Configurations
+
+D) Datanode Specific Configurations
+
+E) Start Hadoop Cluster
+
+   hdfs namenode -format
+   $HADOOP_HOME/sbin/start-dfs.sh
+   $HADOOP_HOME/sbin/start-yarn.sh
+   $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver
+
+
+F) Oozie Installation/Build
+
+G) Commands 
+
+i) Upload all the files into hadoop directory /usr/local/hadoop
+
+mkdir input
+
+ii) Upload the entire data set to the input directory /usr/local/hadoop/input
+
+$ hdfs namenode -format
+$ sbin/start-all.sh
+$ sbin/mr-jobhistory-daemon.sh start historyserver
+
+iii) Upload input file to HDFS
+
+$ hdfs dfs -mkdir -p input
+$ hdfs dfs -put input/* input
+
+iv) Upload oozie's share file to HDFS
+
+$ cd $OOZIE_HOME
+$ sudo tar xvf oozie-sharelib-4.3.1.tar.gz 
+$ cd $HADOOP_HOME
+$ hdfs dfs -put $OOZIE_HOME/share share
+
+v) Upload workflow.xml to HDFS
+
+vi) Compile the java files and make a jar file and upload the jar file to HDFS
+
+vii)Initialize the database of oozie
+
+$ $OOZIE_HOME/bin/ooziedb.sh create -sqlfile oozie.sql -run
+$ $OOZIE_HOME/bin/oozied.sh start
+
+viii) Run the program
+
+$ oozie job -oozie http://localhost:11000/oozie -config job.properties -run
+
+$ hdfs dfs -get project_temp/output output
+
+ix) Get the Result from HDFS
+
+
